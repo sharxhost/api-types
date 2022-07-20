@@ -71,4 +71,14 @@ interface ServiceStatsSuccessResponse extends SharXJSONSuccessResponse {
    * The total number of uploaded images
    */
   images: number;
+
+  /**
+   * The registered user count
+   */
+  users: number;
+
+  /**
+   * The total number of logged in dashboard sessions
+   */
+  sessions: number;
 }
