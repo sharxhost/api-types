@@ -1,0 +1,43 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint",
+		"prettier"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+		"prettier"
+	],
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"tsconfigRootDir": ".",
+		"project": [
+			"./tsconfig.json"
+		]
+	},
+	"rules": {
+		"@typescript-eslint/no-misused-promises": "off",
+		"quotes": [
+			"warn",
+			"double"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"comma-dangle": [
+			"warn",
+			"always-multiline"
+		],
+		"new-parens": [
+			"warn",
+			"never"
+		]
+	}
+}
