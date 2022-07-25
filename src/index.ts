@@ -3,12 +3,12 @@ import { SharXError, UnknownError } from "./errors";
 /**
  * A generic SharX API Response
  */
-export type SharXResponse = Record<string, unknown> | Buffer;
+export type SharXResponse = SharXJSONResponse | SharXBinaryResponse;
 
 /**
  * A JSON response from the API
  */
-export interface SharXJSONResponse extends Extract<SharXResponse, Record<string, unknown>> {
+export interface SharXJSONResponse {
   /**
    * Determines if the request was successful
    */
@@ -54,7 +54,7 @@ export function isFailedResponse(response: SharXJSONResponse): response is SharX
 /**
  * A binary API response used for sending files
  */
-export type SharXBinaryResponse = Extract<SharXResponse, Buffer>;
+export type SharXBinaryResponse = Buffer;
 
 /**
  * Checks if the API response is a JSON response
