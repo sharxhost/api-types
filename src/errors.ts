@@ -40,6 +40,7 @@ interface JsonFieldErrorData extends Record<string, unknown> {
 }
 
 export class JsonFieldError extends MalformedRequestError {
+  declare data: JsonFieldErrorData;
   constructor(data: JsonFieldErrorData) {
     super(data);
   }
@@ -50,6 +51,7 @@ interface IllegalCharacterErrorData extends JsonFieldErrorData {
 }
 
 export class IllegalCharacterError extends JsonFieldError {
+  declare data: IllegalCharacterErrorData;
   constructor(data: IllegalCharacterErrorData) {
     super(data);
   }
@@ -60,6 +62,7 @@ interface TooShortFieldErrorData extends JsonFieldErrorData {
 }
 
 export class TooShortFieldError extends JsonFieldError {
+  declare data: TooShortFieldErrorData;
   constructor(data: TooShortFieldErrorData) {
     super(data);
   }
@@ -70,6 +73,7 @@ interface TooLongFieldErrorData extends JsonFieldErrorData {
 }
 
 export class TooLongFieldError extends JsonFieldError {
+  declare data: TooLongFieldErrorData;
   constructor(data: TooLongFieldErrorData) {
     super(data);
   }
@@ -123,12 +127,14 @@ interface FieldAlreadyExistsErrorData extends Record<string, unknown> {
 }
 
 export class FieldAlreadyExistsError extends ResourceAlreadyExistsError {
+  declare data: FieldAlreadyExistsErrorData;
   constructor(data: FieldAlreadyExistsErrorData) {
     super(data);
   }
 }
 
 export class UserAlreadyRegisteredError extends ResourceAlreadyExistsError {
+  declare data: FieldAlreadyExistsErrorData;
   constructor(data: FieldAlreadyExistsErrorData) {
     super(data);
   }
