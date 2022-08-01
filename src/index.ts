@@ -47,7 +47,7 @@ export interface SharXJSONErrorResponse<T extends SharXError = SharXError> exten
 /**
  * Checks if the JSON API response has failed
  */
-export function isFailedResponse(response: SharXJSONResponse): response is SharXJSONErrorResponse {
+export function isFailedResponse<T extends SharXJSONResponse>(response: SharXJSONResponse): response is (T extends (SharXJSONSuccessResponse | SharXJSONErrorResponse) ? Exclude<T, SharXJSONSuccessResponse> : SharXJSONErrorResponse) {
   return !response.success;
 }
 
