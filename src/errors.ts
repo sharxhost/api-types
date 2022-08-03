@@ -11,7 +11,7 @@ export abstract class SharXError {
     this.httpCode = httpCode;
   }
 
-  toJSON(): Record<string, unknown> {
+  toJSON() {
     return {
       code: this.code,
       data: this.data,
@@ -30,24 +30,14 @@ export class UnknownError extends SharXError {
   }
 }
 
-interface NormalError extends SharXError {
-  data: Record<string, unknown>;
-  code: Exclude<string, "UnknownError">;
-}
-
-export function isNormalError(error: SharXError): error is NormalError {
-  return error.code !== "UnknownError";
-}
-
-export class MalformedRequestError extends SharXError implements NormalError {
-  declare data: Record<string, unknown>;
+export class MalformedRequestError extends SharXError {
   code = "MalformedRequestError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data, 400);
   }
 }
 
-interface JsonFieldErrorData extends Record<string, unknown> {
+interface JsonFieldErrorData {
   field: string;
 }
 
@@ -97,58 +87,55 @@ export class TooLongFieldError extends JsonFieldError {
 
 export class InvalidAuthHeaderError extends MalformedRequestError {
   code = "InvalidAuthHeaderError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data);
   }
 }
 
-export class InvalidCredentialsError extends SharXError implements NormalError {
-  declare data: Record<string, unknown>;
+export class InvalidCredentialsError extends SharXError {
   code = "InvalidCredentialsError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data, 401);
   }
 }
 
 export class InvalidTokenError extends InvalidCredentialsError {
   code = "InvalidTokenError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data);
   }
 }
 
 export class ExpiredTokenError extends InvalidTokenError {
   code = "ExpiredTokenError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data);
     this.httpCode = 403;
   }
 }
 
-export class ResourceNotFoundError extends SharXError implements NormalError {
-  declare data: Record<string, unknown>;
+export class ResourceNotFoundError extends SharXError {
   code = "ResourceNotFoundError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data, 404);
   }
 }
 
 export class ImageNotFoundError extends ResourceNotFoundError {
   code = "ImageNotFoundError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data);
   }
 }
 
-export class ResourceAlreadyExistsError extends SharXError implements NormalError {
-  declare data: Record<string, unknown>;
+export class ResourceAlreadyExistsError extends SharXError {
   code = "ResourceAlreadyExistsError";
-  constructor(data: Record<string, unknown> = {}) {
+  constructor(data = {}) {
     super(data, 400);
   }
 }
 
-interface FieldAlreadyExistsErrorData extends Record<string, unknown> {
+interface FieldAlreadyExistsErrorData {
   field: string;
 }
 
